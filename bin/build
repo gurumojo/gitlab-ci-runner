@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "Building ..."
+
+docker build -f Dockerfile.compose -t compose:latest .
+docker run --rm compose build

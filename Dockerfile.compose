@@ -1,0 +1,15 @@
+FROM docker/compose:1.23.2
+
+RUN set -x && \
+	uname -a && \
+	date
+
+WORKDIR /opt/gurumojo
+
+COPY .env .env
+COPY bin bin
+COPY docker-compose*yml ./
+COPY Dockerfile* ./
+
+# ENTRYPOINT ["docker-compose"]
+# CMD ["help"]

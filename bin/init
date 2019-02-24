@@ -1,0 +1,25 @@
+#!/bin/sh
+
+root=$(dirname $(dirname $0))
+
+echo "Initializing ..."
+
+set -a
+source "$root/.env"
+set +a
+
+if [ -n "$DEBUG" ] ;then
+	echo
+	env \
+	| grep -e '^CI.*' -e '^COMPOSE.*' -e '^DOCKER.*' -e '^GITLAB.*' -e '^HOST.*' \
+	| grep -v -e PASSWORD -e TLS -e TOKEN
+	| sort
+	echo "USER=$(whoami)"
+	ls -l /var/*/docker*
+	docker info
+	echo
+	docker -v
+	docker image ls
+fi
+
+exec "$root/bin/build"

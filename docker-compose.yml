@@ -1,0 +1,13 @@
+version: '2'
+networks:
+  private:
+    driver: bridge
+services:
+  linux:
+    build:
+      context: .
+    networks:
+      - private
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # http://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/
